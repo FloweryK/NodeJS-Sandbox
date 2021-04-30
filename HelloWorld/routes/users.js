@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 let users = [
     {
         id: 1,
@@ -72,5 +71,5 @@ router.post('/', (req, res) => {
     return res.status(201).json(newUser)
 });
 
-
+/* exports */
 module.exports = router;
