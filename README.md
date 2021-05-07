@@ -7,28 +7,28 @@
 
 
 
-### 2021-04-26
+### 🌸2021-04-26
 
 - node.js를 처음 시작했다. 
 - npm, nvm으로 package 관리하는 법을 알았다.
 
 
 
-### 2021-04-27
+### 🌸2021-04-27
 
 - express로 API 서버 만드는 법을 알았다. 
 - GET, DELETE, POST API 만들고, 파라미터를 설정하는 법을 알았다.
 
 
 
-### 2021-04-29
+### 🌸2021-04-29
 
 - 라우팅으로 API를 관리하는 법을 배웠다. express-generator를 많이 참고하고있다.
 - 아직 DB랑 연동하는 법은 모르겠다.
 
 
 
-### 2021-04-30
+### 🌸2021-04-30
 
 - MySQL의 DB에서 데이터를 읽어오는 API를 만들 수 있게 되었다 (routes/memo.js).
 - express를 express-generator 없이 쓰면서 routes 디렉토리를 만들었다.
@@ -37,16 +37,14 @@
 
 
 
-### 2021-05-03
+### 🌸2021-05-03
 
 - 생활코딩 WEB1-HTML에서 HTML 읽는 법, 쓰는 법을 배웠다. 
 - 생활코딩 WEB2-Node.js 공부를 시작했다. WEB3-express에 MySQL을 사용해보고싶어서 순서대로 공부 할 생각이다.
 
 
 
-### 2021-05-04
-
-스터디를 시작했다. 계속 문서를 지웠다 만들었다해서 머리가 조금 복잡하다.
+### 🌸2021-05-04
 
 **자바스크립트**
 
@@ -57,10 +55,6 @@
 
 - node.js에서 `response.end`에 올라가는게 실제 브라우저에서 보이는 정보다.
 
-- url 구성
-
-  ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a772e840-13c6-4380-8e90-c9c1d2447ea6/asdfasdf.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a772e840-13c6-4380-8e90-c9c1d2447ea6/asdfasdf.png)
-
 - 쿼리 스트링 사용법
 
   - url은 `request.url`로 불러온다.
@@ -69,7 +63,7 @@
 
 
 
-### 2021-05-07
+### 🌸2021-05-07
 
 **11. App 제작 - 동적인 웹페이지 만들기**
 
@@ -85,25 +79,6 @@
 - node에 console에서 파라미터를 줄 때는 `process.argv`를 사용하면 된다.
 
 **19. App 제작 - Not Found 구현, 홈페이지 구현**
-
-- url을 파싱하면 다음과 같은 내용이 들어있다.
-
-  ```json
-  Url {
-    protocol: null,
-    slashes: null,
-    auth: null,
-    host: null,
-    port: null,
-    hostname: null,
-    hash: null,
-    search: '?id=HTML',
-    query: [Object: null prototype] { id: 'HTML' },
-    pathname: '/',
-    path: '/?id=HTML',
-    href: '/?id=HTML'
-  }
-  ```
 
 - 전통적 약속: 제대로 된 pathname을 줬을 경우 200을, 아니면 404를 준다.
 
