@@ -41,29 +41,64 @@
 
 - 생활코딩 WEB1-HTML에서 HTML 읽는 법, 쓰는 법을 배웠다. 
 - 생활코딩 WEB2-Node.js 공부를 시작했다. WEB3-express에 MySQL을 사용해보고싶어서 순서대로 공부 할 생각이다.
+- 
 
+### 🌸 2021-05-04
 
+- Hello world 서버 만들기
 
-### 🌸2021-05-04
+  ```jsx
+  // Node.js의 http 모듈을 이용해서 서버를 만들 수 있음
+  var http = require('http')
+  
+  // 'hello world!'를 띄우는 서버 정의
+  var app = http.createServer(function(req, res){
+      // res.end에 태워서 보내는 것이 실제 브라우저에서 보이는 것
+      res.end('hello world!')
+  });
+  
+  // 대기타면서 request를 계속 받기
+  app.listen(port=3000)
+  ```
 
-**자바스크립트**
+  ![helloworld](readme/helloworld.PNG)
 
-- Javascript의 문법 적당히를 배웠다.
-- var는 붙이지 않는 이유를 아는게 아니라면, var을 붙인다.
+- URL 구성
 
-**노드**
+  <img src="readme/url.PNG" alt="url" style="zoom: 67%;" />
 
-- node.js에서 `response.end`에 올라가는게 실제 브라우저에서 보이는 정보다.
+  ※ URL과 URI의 차이는?
 
-- 쿼리 스트링 사용법
+  [URI & URL 차이](https://velog.io/@jch9537/URI-URL)
+
+- Pathname(=host, domain), Query string 사용법
 
   - url은 `request.url`로 불러온다.
-  - url은 `url.parse`를 이용해서 쿼리 스트링을 분리할 수 있다. → parse는 deprecated
-  - 이걸 `response.end`에 넣어서 쿼리에 넣은 값을 보여주는 웹 어플리케이션을 만들 수 있다(!!)
+  - url에서 `url.parse` 로 query string, pathname을 분리할 수 있다. → parse는 deprecated
 
+  ```jsx
+  var http = require('http')
+  var url = require('url')                            // url을 parsing하려면 Node.js의 url 모듈이 필요하다
+  
+  var app = http.createServer(function(req, res){
+      var _url = req.url
+      var query = url.parse(_url, true).query
+      var pathname = url.parse(_url, true).pathname
+  
+      var text = ''
+      text += `pathname: ${pathname}\\n`               // pathname은 그냥 string으로 가져와짐
+      for (var key in query){                         // query는 여러개 있을 수 있어서 dictObject로 가져와짐
+          text += `query: ${key} = ${query[key]}\\n`
+      }
+      res.end(text)
+  })
+  
+  app.listen(port=3000)
+  ```
 
+  ![url-parse](readme/url-parse.PNG)
 
-### 🌸2021-05-07
+### 🌸 2021-05-07
 
 **11. App 제작 - 동적인 웹페이지 만들기**
 
@@ -71,14 +106,64 @@
 
 **12. Node.js의 파일 읽기 기능**
 
-- fs를 이용해서 fileread를 할 수 있다.
-- 파일 내용을 `fs.readFile`로 읽어서 표시할 수 있다. 이걸 이용해서 디렉토리를 체계적이고 간단하게 할 수 있다.
+- Nojde.js의 fs 모듈을 사용하면, 파일 내용을 `fs.readFile`로 읽어서 표시할 수 있다.
+
+- 이걸 이용해서 디렉토리를 체계적이고 간단하게 할 수 있다.
+
+  ![fileread-directory](readme/fileread-directory.PNG)
+
+- 이러면 새로 페이지를 만들 때마다 app.js를 재시작 할 필요 없이 그냥 로딩만 다시 하면 된다.
+
+  ```jsx
+  var http = require('http')
+  var url = require('url')
+  var fs = require('fs')
+  
+  var app = http.createServer(function(req, res){
+      var _url = req.url;
+      var query = url.parse(_url, true).query;
+      var pathname = url.parse(_url, true).pathname;
+  
+  		// desc에 들어가는 내용을 출력해보자
+      var desc
+      fs.readFile(`data/${query.id}`, 'utf-8', function (err, desc) {
+  				// id가 있으면 내용을 desc에 넣음
+  				// id가 undefined면 query가 없는거니까 홈화면
+  				// 한글 파일 불러올때는 'utf-8'로 해야함. 근데 HTML 형식을 보내는게 아니라 res.end를 하는거면 여전히 깨질 것.
+          if(query.id === undefined){
+              desc = 'Hello, world!'
+          }
+          res.end(desc)
+      })
+  })
+  
+  app.listen(port=3000)
+  ```
 
 **18. Node.js 콘솔에서의 입력값**
 
 - node에 console에서 파라미터를 줄 때는 `process.argv`를 사용하면 된다.
 
 **19. App 제작 - Not Found 구현, 홈페이지 구현**
+
+- url을 프린트하면 다음과 같은 내용이 들어있다.
+
+  ```json
+  Url {
+    protocol: null,
+    slashes: null,
+    auth: null,
+    host: null,
+    port: null,
+    hostname: null,
+    hash: null,
+    search: '?id=HTML',
+    query: [Object: null prototype] { id: 'HTML' },
+    pathname: '/',
+    path: '/?id=HTML',
+    href: '/?id=HTML'
+  }
+  ```
 
 - 전통적 약속: 제대로 된 pathname을 줬을 경우 200을, 아니면 404를 준다.
 
