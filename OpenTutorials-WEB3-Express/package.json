@@ -1,0 +1,15 @@
+{
+  "name": "OpenTutorials-WEB3-Express",
+  "version": "1.0.0",
+  "description": "| 디렉토리명                 | 설명                                                         | 날짜             |\r | -------------------------- | ------------------------------------------------------------ | ---------------- |\r | HelloWorld                 | Node.js를 처음 사용해보고, express로 서버를 만들어보고, MySQL에서 데이터를 읽어보는 프로젝트 | 2021.04.26~04.30 |\r | OpenTutorials-WEB2-Node.js | 생활코딩 WEB2 - Node.js 스터디                               | 2021.05.04~      |",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
