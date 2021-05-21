@@ -1,11 +1,6 @@
-# NodeJS-Sandbox
+# 생활코딩 WEB2 - Node.js 스터디
 
-| 디렉토리명                 | 설명                                                         | 날짜             |
-| -------------------------- | ------------------------------------------------------------ | ---------------- |
-| HelloWorld                 | Node.js를 처음 사용해보고, express로 서버를 만들어보고, MySQL에서 데이터를 읽어보는 프로젝트 | 2021.04.26~04.30 |
-| OpenTutorials-WEB2-Node.js | 생활코딩 WEB2 - Node.js 스터디                               | 2021.05.04~      |
-
-### 🌸 2021-05-04
+## 2021-05-04
 
 - Hello world 서버 만들기
 
@@ -29,9 +24,7 @@
 
   <img src="readme/url.PNG" alt="url" style="zoom: 67%;" />
 
-  ※ URL과 URI의 차이는?
-
-  [URI & URL 차이](https://velog.io/@jch9537/URI-URL)
+  ※ URL과 URI의 차이는?: [URI & URL 차이](https://velog.io/@jch9537/URI-URL)
 
 - Pathname(=host, domain), Query string 사용법
 
@@ -60,7 +53,9 @@
 
   ![url-parse](readme/url-parse.PNG)
 
-### 🌸 2021-05-07
+
+
+## 2021-05-07
 
 **11. App 제작 - 동적인 웹페이지 만들기**
 
