@@ -1,23 +1,88 @@
-var express = require('express')
 var fs = require('fs')
-var app = express()
+var qs = require('qs')
+var path = require('path')
+var sanitizeHtml = require('sanitize-html')
+var express = require('express')
 var template = require('./lib/template')
 
+var app = express()
+
 app.get('/', function(req, res) {
-    fs.readdir('./data', 'utf-8', function (err, filelist) {
+    fs.readdir('./data', 'utf-8', function(err, filelist) {
         var title = 'welcome'
         var description = 'Hello, Node.js'
+
         var list = template.list(filelist)
         var html = template.HTML(title, list,
             `<h2>${title}</h2> <p>${description}</p>`,
             `<a href="/create">create</a>`)
+
         res.status(200).send(html)
     })
 })
 
-app.get('/page', (req, res) => res.send('page'))
-app.listen(3000, () => console.log('example app listening on port 3000'))
+app.get('/page/:pageId', function(req, res) {
+    fs.readdir('./data', 'utf-8', function(err, filelist) {
+        var pageId = req.params.pageId
+        var pageIdFiltered = path.parse(req.params.pageId).base
 
+        fs.readFile(`data/${pageIdFiltered}`, 'utf-8', function(err, description) {
+            var title = pageId
+            var titleSanitized = sanitizeHtml(title)
+            var descriptionSanitized = sanitizeHtml(description, {allowedTags: ['h1']})
+
+            var list = template.list(filelist)
+            var html = template.HTML(titleSanitized, list,
+                `<h2>${title}</h2> <p>${descriptionSanitized}</p>`,
+                `<a href="/create">create</a>
+                 <a href="/update?id=${titleSanitized}">update</a>
+                 <form action="delete_process" method="post">
+                    <input type="hidden" name="id" value="${titleSanitized}">
+                    <input type="submit" value="delete">
+                 </form>`)
+
+            res.status(200).send(html)
+        })
+    })
+})
+
+app.get('/create', function(req, res){
+    fs.readdir('./data', 'utf-8', function(err, filelist) {
+        var title = 'WEB - create'
+        var list = template.list(filelist)
+        var html = template.HTML(title, list, `
+          <form action="/create_process" method="post">
+            <p><input type="text" name="title" placeholder="title"></p>
+            <p>
+              <textarea name="description" placeholder="description"></textarea>
+            </p>
+            <p>
+              <input type="submit">
+            </p>
+          </form>
+        `, '')
+
+        res.status(201).send(html)
+    })
+})
+
+app.post('/create_process', function(req, res){
+    var body = ''
+    req.on('data', function(data){
+        body = body + data
+    })
+    req.on('end', function(){
+        var post = qs.parse(body)
+        var title = post.title
+        var description = post.description
+        fs.writeFile(`data/${title}`, description, 'utf8', function(err){
+            res.status(302).send({Location: `/?id=${title}`})
+        })
+    })
+})
+
+
+app.listen(3000, () => console.log('example app listening on port 3000'))
 
 /*
 var http = require('http');
